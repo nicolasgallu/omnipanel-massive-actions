@@ -1,0 +1,30 @@
+# Build del worker de acciones masivas y push a Artifact Registry.
+# La carpeta mass-actions-worker/ es autónoma (mismo patrón que load-tests/).
+#
+# Ejecutar desde la raíz del repo (el contexto de build es mass-actions-worker/):
+#   gcloud builds submit --config mass-actions-worker/cloudbuild.yaml mass-actions-worker/
+#
+# _IMAGE es un placeholder: apuntalo a TU registry (el mismo proyecto/patrón
+# que load-tests) o pasalo por sustitución:
+#   gcloud builds submit --config mass-actions-worker/cloudbuild.yaml mass-actions-worker/ \
+#     --substitutions=_IMAGE=us-central1-docker.pkg.dev/TU-PROYECTO/mass-actions/worker:latest
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -t
+      - '$_IMAGE'
+      - -f
+      - Dockerfile
+      - .
+
+# Logs solo a Cloud Logging (sin bucket GCS). Obligatorio cuando el build
+# corre con una service account explícita (trigger de GitHub).
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _IMAGE: 'us-west1-docker.pkg.dev/nicoservertest/omnipanel-massive-actions/mass-actions/worker:latest'
+
+images:
+  - '$_IMAGE'

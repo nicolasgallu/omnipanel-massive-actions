@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+
+# Node (se instala dentro del build del frontend)
+frontend/node_modules
+frontend/dist
+
+# Python venvs locales (grandes, con symlinks rotos)
+backend/.venv
+.venv
+venv-srvice-inventory-ecommerce/
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+**/.pytest_cache
+
+# Secretos y config local — NUNCA entran a la imagen
+backend/.env
+backend/.env.test
+backend/service_account.json
+.env
+.env.test
+service_account.json
+
+# Dump local de la DB (grande + contiene tokens)
+backend/seed_data.sql
+
+# Tests (no corren en la imagen de producción)
+backend/tests

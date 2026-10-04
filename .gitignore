@@ -1,0 +1,21 @@
+test/
+.env
+.env.production
+venv-srvice-inventory-ecommerce/
+service_account.json
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env.test
+tests/
+.venv
+legacy/
+db_helper/
+insert_db.py
+setup_db.py
+frontend/node_modules/
+frontend/dist/
+/migration
+# dump local de la DB para desarrollo (contiene credenciales/tokens)
+backend/seed_data.sql
